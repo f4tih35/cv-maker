@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Login</h3>
+
+<form action="" method="POST">
+
+    <!-- flash message start -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <!-- flash message end -->
+
+    {{ form.hidden_tag() }}
+
+    {{ form.email(placeholder='Email') }}
+    {{ form.password(placeholder='Password') }}
+    {{ form.submit() }}
+
+
+</form>
+
+{% endblock content %}

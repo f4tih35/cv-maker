@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Register</h3>
+
+<form action="" method="POST">
+    {{ form.hidden_tag() }}
+
+    {{ form.username(placeholder='Username') }}
+    {{ form.email(placeholder='Email') }}
+    {{ form.password(placeholder='Password') }}
+    {{ form.submit() }}
+
+
+</form>
+
+{% endblock content %}

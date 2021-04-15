@@ -40,7 +40,8 @@ def login():
             flash(f'{form.email.data} logged in', 'success')
             return redirect(url_for('welcome'))
         else:
-            flash(f'{form.email.data} login failed', 'danger')
+            flash(f'Email or password incorrect', 'danger')
+            return redirect(url_for('login'))
     return render_template('login.html', title='Login', form=form)
 
 @app.route('/welcome',methods=['GET','POST'])
@@ -70,6 +71,10 @@ def register():
         return redirect(url_for('index'))
     form = RegisterForm()
     if form.validate_on_submit():
+        exist = User.query.filter_by(email=form.email.data).first()
+        if exist:
+            flash(f'This email already exists!', 'danger')
+            return redirect(url_for('register'))
         pw_hash = bcrypt.generate_password_hash(form.password.data)
         user = User(username=form.username.data, email=form.email.data, password=pw_hash)
         db.session.add(user)

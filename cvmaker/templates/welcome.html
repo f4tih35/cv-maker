@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Welcome</h3>
+<form action="" method="POST">
+{{ form.hidden_tag() }}
+{{ form.address(placeholder='Address') }}
+{{ form.work(placeholder='Work') }}
+{{ form.school(placeholder='School') }}
+{{ form.hobbies(placeholder='Hobbies') }}
+{{ form.submit() }}
+</form>
+{% endblock content %}

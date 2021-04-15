@@ -12,3 +12,20 @@ class LoginForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(), Email()])
     password = PasswordField('Password',validators=[DataRequired()])
     submit = SubmitField('Sign In')
+
+class WelcomeForm(FlaskForm):
+    address = StringField('Address')
+    work = StringField('Job')
+    school = StringField('School')
+    hobbies = StringField('Hobbies')
+    submit = SubmitField('Continue')
+
+class EditForm(FlaskForm):
+    username = StringField('Username',validators=[DataRequired(), Length(min=2,max=20)])
+    email  = StringField('Email',validators=[DataRequired(), Email()])
+    address = StringField('Address')
+    work = StringField('Job')
+    school = StringField('School')
+    hobbies = StringField('Hobbies')
+    submit = SubmitField('Continue')
+    

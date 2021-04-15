@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
 <h3>Index</h3>
 
 <!-- flash message -->
@@ -12,5 +15,30 @@
     </ul>
   {% endif %}
 {% endwith %}
+
+
+<form action="" method="POST">
+
+  {{ form.hidden_tag() }}
+
+  <p class="info-element">Welcome, {{ current_user.username }} </p>
+  {{ form.username(placeholder='Username', class_="form-element") }}
+  <p class="info-element">Email: {{ current_user.email }}</p>
+  {{ form.email(placeholder='Email', class_="form-element") }}
+  <p class="info-element">Address: {{ current_user.address }}</p>
+  {{ form.address(placeholder='Address', class_="form-element") }}
+  <p class="info-element">Work Experience: {{ current_user.work }}</p>
+  {{ form.work(placeholder='Work Experience', class_="form-element") }}
+  <p class="info-element">Education: {{ current_user.school }}</p>
+  {{ form.school(placeholder='Education', class_="form-element") }}
+  <p class="info-element">Hobbies: {{ current_user.hobbies }}</p>
+  {{ form.hobbies(placeholder='Hobbies', class_="form-element") }}
+
+  <button onclick="showForm()">Edit</button>
+</form>
+
+
+
+<script src="{{ url_for('static', filename = 'index.js') }}"></script>
 
 {% endblock content %}

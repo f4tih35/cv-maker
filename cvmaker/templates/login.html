@@ -45,12 +45,12 @@
                 <a href="#" class="pull-right">Forgot Password?</a>-->
             </div>        
         </form>
-        <p class="text-center">Don't have an account?<a href="#">Sign Up</a></p>
+        <p class="text-center">Don't have an account?<a href="{{url_for('register')}}"> Sign Up</a></p>
     </div>
 
 </form>
 
-    <!-- flash message start -->
+    <!-- flash message start
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class=flashes>
@@ -60,7 +60,7 @@
     </ul>
     {% endif %}
     {% endwith %}
-    <!-- flash message end -->
+    flash message end -->
 
 
 {% endblock content %}

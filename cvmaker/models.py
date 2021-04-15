@@ -1,6 +1,7 @@
 from cvmaker import db, login_manager
 from flask_login import UserMixin
 import json
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -11,7 +12,11 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(30),nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(30),nullable=False)
+    firstname = db.Column(db.String(30),nullable=True)
+    lastname = db.Column(db.String(30),nullable=True)
+    phone = db.Column(db.String(100),nullable=True)
     address = db.Column(db.String(100),nullable=True)
+    dateofbirth = db.Column(db.DateTime, nullable = True)
     work = db.Column(db.String(100),nullable=True)
     school = db.Column(db.String(100),nullable=True)
     hobbies = db.Column(db.String(100),nullable=True)

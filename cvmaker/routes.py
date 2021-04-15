@@ -6,6 +6,7 @@ from flask_login import login_required, login_user, logout_user, current_user
 import json
 import pdfkit
 from flask_weasyprint import render_pdf
+from . import bcrypt
 
 
 @app.route('/',methods=['GET','POST'])
@@ -16,6 +17,9 @@ def index():
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
+        current_user.firstname = form.firstname.data
+        current_user.lastname = form.lastname.data
+        current_user.phone = form.phone.data
         current_user.address = form.address.data
         current_user.work = form.work.data
         current_user.school = form.school.data
@@ -31,7 +35,7 @@ def login():
     form = LoginForm()  
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and user.password == form.password.data:
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
             flash(f'{form.email.data} logged in', 'success')
             return redirect(url_for('welcome'))
@@ -45,9 +49,13 @@ def welcome():
     if current_user.welcome == False:
         form = WelcomeForm()
         if form.validate_on_submit():
+            current_user.firstname = form.firstname.data
+            current_user.lastname = form.lastname.data
+            current_user.address = form.address.data
+            current_user.phone = form.phone.data
+            current_user.hobbies = form.hobbies.data
             current_user.work = form.work.data
             current_user.school = form.school.data
-            current_user.hobbies = form.hobbies.data
             current_user.welcome = True
             db.session.add(current_user)
             db.session.commit()
@@ -62,7 +70,8 @@ def register():
         return redirect(url_for('index'))
     form = RegisterForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        user = User(username=form.username.data, email=form.email.data, password=pw_hash)
         db.session.add(user)
         db.session.commit()
         flash(f'{form.username.data} account created', 'success')
@@ -79,8 +88,7 @@ from weasyprint import HTML
 
 @app.route('/getpdf')
 @login_required
-def function():
-    # HTML(string=render_template('resume.html')).write_pdf("report.pdf")
-    # return ("itworked")
+def getpdf():
     html = render_template('resume.html')
+    #return render_template('resume.html', title='Register')
     return render_pdf(HTML(string=html))

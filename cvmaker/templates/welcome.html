@@ -1,6 +1,74 @@
 {% extends "layout.html" %}
 {% block content %}
-<h3>Welcome</h3>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='welcome.css') }}">
+
+<div class="wrapper">
+
+    <form action="" method="POST" class="form-wizard js-form-wizard">
+        {{ form.hidden_tag() }}
+        <h1>Register</h1>
+
+        <fieldset class="step js-step">
+            <legend>Name</legend>
+            <div class="input-group js-input-group">
+                <label for="first_name" class="formheader">First name</label>
+                {{ form.firstname(placeholder='eg: Thomas',class='form-control js-form-control') }}
+            </div>
+            <div class="input-group js-input-group">
+                <label for="last_name" class="formheader">Last name</label>
+                {{ form.lastname(placeholder='eg: Anderson',class='form-control js-form-control') }}
+            </div>
+        </fieldset>
+
+        <fieldset class="step js-step">
+            <legend>Contact Info</legend>
+            <div class="input-group js-input-group">
+                <label for="address" class="formheader">Address</label>
+                {{ form.address(placeholder='eg: Calista Wise 7292 Dictum Av. San Antonio MI 47096',class='form-control js-form-control') }}
+            </div>
+            <div class="input-group js-input-group">
+                <label for="phone" class="formheader">Phone</label>
+                {{ form.phone(placeholder='eg: (492) 709-6392',class='form-control js-form-control') }}
+            </div>
+        </fieldset>
+
+        <fieldset class="step js-step">
+            <div class="input-group js-input-group">
+                <label for="dateofbirth" class="formheader">Date of birth</label>
+                ...
+            </div>
+            <div class="input-group js-input-group">
+                <label for="hobbies" class="formheader">Hobbies</label>
+                {{ form.hobbies(placeholder='eg: Chess, Swimming',class='form-control js-form-control') }}
+            </div>
+        </fieldset>
+
+        <fieldset class="step js-step">
+            <div class="input-group js-input-group">
+                <label for="work" class="formheader">Work</label>
+                {{ form.work(placeholder='eg: Software Developer, SOCRadar, 2021 - Present',class='form-control js-form-control') }}
+            </div>
+            <div class="input-group js-input-group">
+                <label for="school" class="formheader">School</label>
+                {{ form.school(placeholder='eg: Computer Engineering, Sakarya University, 2019 - Present',class='form-control js-form-control') }}
+            </div>
+        </fieldset>
+
+        <div class="input-group text-right">
+            <button type="button" onclick="wbdfuncdes()" class="btn-prev js-btn-prev">Prev</button>
+            <button type="button" onclick="wbdfuncasc()" class="js-btn-next" id="willbedeleted" data-step-text="Next" data-final-step-text="Submit">Next</button>
+            {{ form.submit(class="js-btn-next") }}
+        </div>
+
+        <div class="progress-bar js-progress-bar"></div>
+    </form>
+
+</div>
+
+<script src="{{ url_for('static', filename='welcome.js') }}"></script>
+
+<!--
 <form action="" method="POST">
 {{ form.hidden_tag() }}
 {{ form.address(placeholder='Address') }}
@@ -9,4 +77,6 @@
 {{ form.hobbies(placeholder='Hobbies') }}
 {{ form.submit() }}
 </form>
+-->
+
 {% endblock content %}

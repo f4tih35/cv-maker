@@ -19,13 +19,19 @@ def index():
         current_user.email = form.email.data
         current_user.firstname = form.firstname.data
         current_user.lastname = form.lastname.data
-        current_user.phone = form.phone.data
+
+        if(type(form.phone.data) == int or type(form.phone.data) == float):
+            current_user.phone = form.phone.data
+        else:
+            flash(f'Phone incorrect', 'danger')
+
         current_user.address = form.address.data
         current_user.work = form.work.data
         current_user.school = form.school.data
         current_user.hobbies = form.hobbies.data
         db.session.add(current_user)
         db.session.commit()
+        flash(f'Edited', 'success')
     return render_template('index.html', title='Home', form=form)
 
 @app.route('/login',methods=['GET','POST'])
@@ -53,7 +59,12 @@ def welcome():
             current_user.firstname = form.firstname.data
             current_user.lastname = form.lastname.data
             current_user.address = form.address.data
-            current_user.phone = form.phone.data
+
+            if(type(form.phone.data) == int or type(form.phone.data) == float):
+                urrent_user.phone = form.phone.data
+            else:
+                flash(f'Phone incorrect', 'danger')
+
             current_user.hobbies = form.hobbies.data
             current_user.work = form.work.data
             current_user.school = form.school.data

@@ -6,17 +6,26 @@ from flask_login import LoginManager, current_user
 from flask_bcrypt import Bcrypt
 from os import environ
 import redis
+from flask_uploads import configure_uploads, IMAGES, UploadSet
+import os
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'mysecretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['UPLOADED_IMAGES_DEST'] = os.path.join(os.getcwd(),'cvmaker/static/uploads/images')
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg']
+
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 from cvmaker.models import User
 
+images = UploadSet('images', IMAGES)
+configure_uploads(app, images)
 
 class MyModelView(ModelView):
     def is_accessible(self):

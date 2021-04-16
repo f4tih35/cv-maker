@@ -26,9 +26,13 @@
 <!-- flash message end -->
 
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
 
   {{ form.hidden_tag() }}
+  <label for="" class="form-element">Profile Picture</label>
+  {{ form.imgfilename(class_="form-element", value=current_user.imgfilename) }}
+  <img class="info-element" src="{{img_url}}" width="150px" height="150px" alt="">
+  </br></br>
 
   <p class="info-element">Welcome, <b>{{ current_user.firstname}} {{current_user.lastname }}</b> </p>
   <label for="" class="form-element">Username</label>
@@ -76,6 +80,7 @@
 </form>
 <a href="#" onclick="showForm()" id="editbtn" class="btn btn-primary">Edit</a>
 <a class="btn btn-primary" id="pdfbtn" href="{{url_for('getpdf')}}">Export PDF</a>
+
 
 <script src="{{ url_for('static', filename = 'index.js') }}"></script>
 

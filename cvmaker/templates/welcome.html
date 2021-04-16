@@ -2,7 +2,13 @@
 {% block content %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='welcome.css') }}">
-
+<style>
+    #submit{
+        background-color: #007bff;
+        color:white;
+        border:none;
+    }
+</style>
 <div class="wrapper">
 
     <form action="" method="POST" class="form-wizard js-form-wizard">
@@ -34,10 +40,6 @@
         </fieldset>
 
         <fieldset class="step js-step">
-            <div class="input-group js-input-group">
-                <label for="dateofbirth" class="formheader">Date of birth</label>
-                ...
-            </div>
             <div class="input-group js-input-group">
                 <label for="hobbies" class="formheader">Hobbies</label>
                 {{ form.hobbies(placeholder='eg: Chess, Swimming',class='form-control js-form-control') }}

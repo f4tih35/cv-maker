@@ -1,12 +1,27 @@
 from cvmaker import app, db, login_manager
-from flask import render_template, flash, redirect, url_for, session, jsonify, make_response
-from cvmaker.forms import RegisterForm, LoginForm, WelcomeForm, EditForm
+from flask import render_template, flash, redirect, url_for, session, jsonify, make_response, request
+from cvmaker.forms import RegisterForm, LoginForm, WelcomeForm, EditForm, MyForm
 from cvmaker.models import User
 from flask_login import login_required, login_user, logout_user, current_user
 import json
 import pdfkit
 from flask_weasyprint import render_pdf
-from . import bcrypt
+from . import bcrypt, images, app
+from werkzeug.utils import secure_filename
+from flask_uploads import configure_uploads, IMAGES, UploadSet
+
+@app.route('/upload',methods=['GET','POST'])
+@login_required
+def upload():
+    form = MyForm()
+    if form.validate_on_submit():
+        filename = images.save(form.image.data)
+        return f'Filename: { filename }'
+    return render_template('upload.html', form=form)
+
+@app.route('/welcomesite')
+def welcomesite():
+    return render_template('welcomesite.html')
 
 
 @app.route('/',methods=['GET','POST'])
@@ -20,18 +35,29 @@ def index():
         current_user.firstname = form.firstname.data
         current_user.lastname = form.lastname.data
 
-        if(type(form.phone.data) == int or type(form.phone.data) == float):
-            current_user.phone = form.phone.data
-        else:
-            flash(f'Phone incorrect', 'danger')
+        try:
+            current_user.phone = int(form.phone.data)
+        except:
+            flash(f'Incorrect Phone', 'danger')
 
         current_user.address = form.address.data
         current_user.work = form.work.data
         current_user.school = form.school.data
         current_user.hobbies = form.hobbies.data
+
+        if not current_user.imgfilename == form.imgfilename.data:
+            try:
+                current_user.imgfilename = images.save(form.imgfilename.data)
+                img_url = images.url(current_user.imgfilename)
+            except:
+                flash(f'Incorrect File', 'danger')
+
         db.session.add(current_user)
         db.session.commit()
         flash(f'Edited', 'success')
+    if current_user.imgfilename:
+        img_url = images.url(current_user.imgfilename)
+        return render_template('index.html', title='Home', form=form, img_url=img_url)
     return render_template('index.html', title='Home', form=form)
 
 @app.route('/login',methods=['GET','POST'])
@@ -90,7 +116,8 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=pw_hash)
         db.session.add(user)
         db.session.commit()
-        flash(f'{form.username.data} account created', 'success')
+        flash(f'Account created', 'success')
+        logout_user()
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 

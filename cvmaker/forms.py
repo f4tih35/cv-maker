@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, DateTimeField
+from wtforms import StringField, PasswordField, SubmitField, DateTimeField, FileField
 from wtforms.validators import DataRequired, Length, Email
 
 class RegisterForm(FlaskForm):
@@ -34,5 +34,8 @@ class EditForm(FlaskForm):
     work = StringField('Job')
     school = StringField('School')
     hobbies = StringField('Hobbies')
+    imgfilename = FileField('image')
     submit = SubmitField('Edit')
     
+class MyForm(FlaskForm):
+    image = FileField('image')

@@ -16,12 +16,12 @@ class User(UserMixin, db.Model):
     lastname = db.Column(db.String(30),nullable=True)
     phone = db.Column(db.String(100),nullable=True)
     address = db.Column(db.String(100),nullable=True)
-    dateofbirth = db.Column(db.DateTime, nullable = True)
     work = db.Column(db.String(100),nullable=True)
     school = db.Column(db.String(100),nullable=True)
     hobbies = db.Column(db.String(100),nullable=True)
     welcome = db.Column(db.Boolean(),nullable=False, default=False)
     isAdmin = db.Column(db.Boolean(),nullable=False, default=False)
+    imgfilename = db.Column(db.Text(),nullable=True)
 
     def __repr__(self):
         return f'User: {self.username} | Email: {self.email}'

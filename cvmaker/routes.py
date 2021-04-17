@@ -20,16 +20,15 @@ def upload():
     return render_template('upload.html', form=form)
 
 
-@app.route('/welcomesite')
-def welcomesite():
-    return render_template('welcomesite.html')
-
-
 @app.route('/')
 @app.route('/home',methods=['GET','POST'])
 @login_required
 def index():
-    return render_template('index-new.html')
+    if current_user.imgfilename:
+        img_url = images.url(current_user.imgfilename)
+    else:
+        img_url = ""
+    return render_template('index-new.html',img_url=img_url)
 
 @app.route('/edit',methods=['GET','POST'])
 @login_required
@@ -40,6 +39,9 @@ def edit():
         current_user.email = form.email.data
         current_user.firstname = form.firstname.data
         current_user.lastname = form.lastname.data
+
+        current_user.job = form.job.data
+        current_user.introducing = form.introducing.data
 
         try:
             current_user.phone = int(form.phone.data)
@@ -57,13 +59,12 @@ def edit():
                 img_url = images.url(current_user.imgfilename)
             except:
                 flash(f'Incorrect File', 'danger')
+                print('incorrect file')
 
         db.session.add(current_user)
         db.session.commit()
         flash(f'Edited', 'success')
-    if current_user.imgfilename:
-        img_url = images.url(current_user.imgfilename)
-        return render_template('edit-new.html', title='Home', form=form, img_url=img_url)
+        return redirect(url_for('index'))
     return render_template('edit-new.html', title='Home', form=form)
 
 @app.route('/login',methods=['GET','POST'])
@@ -85,17 +86,20 @@ def login():
 @app.route('/welcome',methods=['GET','POST'])
 @login_required
 def welcome():
-    if current_user.welcome == False or current_user.welcome == True:
+    if current_user.welcome == False:
         form = WelcomeForm()
         if form.validate_on_submit():
             current_user.firstname = form.firstname.data
             current_user.lastname = form.lastname.data
             current_user.address = form.address.data
 
-            if(type(form.phone.data) == int or type(form.phone.data) == float):
-                urrent_user.phone = form.phone.data
-            else:
-                flash(f'Phone incorrect', 'danger')
+            current_user.job = form.job.data
+            current_user.introducing = form.introducing.data
+
+            try:
+                current_user.phone = int(form.phone.data)
+            except:
+                flash(f'Incorrect Phone', 'danger')
 
             current_user.hobbies = form.hobbies.data
             current_user.work = form.work.data
@@ -106,7 +110,7 @@ def welcome():
             return redirect(url_for('index'))
     else:
         return redirect(url_for('index')) 
-    return render_template('welcome.html', title='Welcome', form=form)
+    return render_template('welcome-new.html', title='Welcome', form=form)
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -138,6 +142,10 @@ from weasyprint import HTML
 @app.route('/getpdf')
 @login_required
 def getpdf():
-    html = render_template('resume.html')
+    if current_user.imgfilename:
+        img_url = images.url(current_user.imgfilename)
+    else:
+        img_url = ""
+    html = render_template('resume-new.html',img_url=img_url)
     #return render_template('resume.html', title='Register')
     return render_pdf(HTML(string=html))

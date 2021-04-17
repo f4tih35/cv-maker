@@ -14,6 +14,8 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(30),nullable=False)
     firstname = db.Column(db.String(30),nullable=True)
     lastname = db.Column(db.String(30),nullable=True)
+    job = db.Column(db.String(50),nullable=True)
+    introducing = db.Column(db.Text(),nullable=True)
     phone = db.Column(db.String(100),nullable=True)
     address = db.Column(db.String(100),nullable=True)
     work = db.Column(db.String(100),nullable=True)

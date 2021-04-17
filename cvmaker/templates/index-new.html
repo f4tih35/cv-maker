@@ -17,18 +17,48 @@
               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Welcome, {{ current_user.firstname}} {{current_user.lastname }}</h6>
                 <a class="btn btn-primary" id="pdfbtn" href="{{url_for('edit')}}">Edit Profile</a>
+                <a class="btn btn-primary" id="pdfbtn" href="{{url_for('getpdf')}}">Export PDF</a>
               </div>
               <div class="card-body">
-                <p class="info-element">Email: {{ current_user.email }}</p>
-                <p class="info-element">First Name: {{ current_user.firstname }}</p>
-                <p class="info-element">Last Name: {{ current_user.lastname }}</p>
-                <p class="info-element">Phone: {{ current_user.phone }}</p>
-                <p class="info-element">Address: {{ current_user.address }}</p>
-                <p class="info-element">Work: {{ current_user.work }}</p>
-                <p class="info-element">School: {{ current_user.school }}</p>
-                <p class="info-element">Hobbies: {{ current_user.hobbies }}</p>
+                <p class="text-center">
+                  <img  style="max-height: 100px;" src="{{img_url}}" alt="">
+                </p>
+                
+                <hr>
+                <p class="info-element">Email:</p> <p class="text-center">{{ current_user.email }}</p>
+                <hr>
+                <p class="info-element">First Name:</p> <p class="text-center">{{ current_user.firstname }}</p>
+                <hr>
+                <p class="info-element">Last Name:</p> <p class="text-center">{{ current_user.lastname }}</p>
+                <hr>
+                <p class="info-element">Job:</p> <p class="text-center">{{ current_user.job }}</p>
+                <hr>
+                <p class="info-element">Introducing:</p> <p class="text-center">{{ current_user.introducing }}</p>
+                <hr>
+                <p class="info-element">Phone:</p> <p class="text-center">{{ current_user.phone }}</p>
+                <hr>
+                <p class="info-element">Address:</p> <p class="text-center">{{ current_user.address }}</p>
+                <hr>
+                <p class="info-element">Work:</p> <p class="text-center">{{ current_user.work }}</p>
+                <hr>
+                <p class="info-element">School:</p> <p class="text-center">{{ current_user.school }}</p>
+                <hr>
+                <p class="info-element">Hobbies:</p> <p class="text-center">{{ current_user.hobbies }}</p>
+                <hr>
               </div>
-              <a class="btn btn-primary" id="pdfbtn" href="{{url_for('getpdf')}}">Export PDF</a>
+              <div class="row">
+                <div class="col-lg-6">
+                  <p class="text-center">
+                    <a class="btn btn-primary" id="pdfbtn" href="{{url_for('edit')}}">Edit Profile</a>
+                  </p>
+                  
+                </div>
+                <div class="col-lg-6">
+                  <p class="text-center">
+                    <a class="btn btn-primary" id="pdfbtn" href="{{url_for('getpdf')}}">Export PDF</a>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 

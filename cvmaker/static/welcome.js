@@ -5,14 +5,14 @@
     var wbdi = 0;
     function wbdfuncasc(){
         wbdi++;
-        if(wbdi>2){
+        if(wbdi>3){
             wbd.style.display="none";
             sbmt.style.display="block";
         }
     }
     function wbdfuncdes(){
         wbdi--;
-        if(wbdi<3){
+        if(wbdi<4){
             wbd.style.display="block";
             sbmt.style.display="none";
         }

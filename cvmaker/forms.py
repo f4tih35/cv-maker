@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, DateTimeField, FileField
+from wtforms import StringField, PasswordField, SubmitField, DateTimeField, FileField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email
 
 class RegisterForm(FlaskForm):
@@ -16,9 +16,11 @@ class LoginForm(FlaskForm):
 class WelcomeForm(FlaskForm):
     firstname = StringField('First Name')
     lastname = StringField('Last Name')
-    phone = StringField('Address')
+    phone = StringField('Phone')
+    introducing = TextAreaField('Introducing')
+    job = StringField('Job')
     address = StringField('Address')
-    work = StringField('Job')
+    work = StringField('Work History')
     school = StringField('School')
     hobbies = StringField('Hobbies')
     submit = SubmitField('Continue')
@@ -28,7 +30,9 @@ class EditForm(FlaskForm):
     email  = StringField('Email',validators=[DataRequired(), Email()])
     firstname = StringField('First Name')
     lastname = StringField('Last Name')
-    phone = StringField('Address')
+    phone = StringField('Phone')
+    introducing = TextAreaField('Introducing')
+    job = StringField('Job')
     address = StringField('Address')
     dateofbirth = DateTimeField('DateOfBirth')
     work = StringField('Job')

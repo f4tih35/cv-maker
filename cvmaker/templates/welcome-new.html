@@ -35,41 +35,49 @@
         <fieldset class="step js-step">
             <legend>Name</legend>
             <div class="input-group js-input-group">
-                <label for="first_name" class="formheader">First name</label>
+                <label for="first_name" class="formheader">First name: </label>
                 {{ form.firstname(placeholder='eg: Thomas',class='form-control js-form-control') }}
             </div>
             <div class="input-group js-input-group">
-                <label for="last_name" class="formheader">Last name</label>
+                <label for="last_name" class="formheader">Last name: </label>
                 {{ form.lastname(placeholder='eg: Anderson',class='form-control js-form-control') }}
+            </div>
+            <div class="input-group js-input-group">
+                <label for="address" class="formheader">Introduce: </label>
+                {{ form.introducing(placeholder='eg: Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi eaque dolorem officiis cupiditate ad assumenda.',class='form-control js-form-control') }}
             </div>
         </fieldset>
 
         <fieldset class="step js-step">
             <legend>Contact Info</legend>
             <div class="input-group js-input-group">
-                <label for="address" class="formheader">Address</label>
+                <label for="address" class="formheader">Address: </label>
                 {{ form.address(placeholder='eg: Calista Wise 7292 Dictum Av. San Antonio MI 47096',class='form-control js-form-control') }}
             </div>
             <div class="input-group js-input-group">
-                <label for="phone" class="formheader">Phone</label>
+                <label for="phone" class="formheader">Phone: </label>
                 {{ form.phone(placeholder='eg: (492) 709-6392',class='form-control js-form-control') }}
             </div>
         </fieldset>
 
         <fieldset class="step js-step">
             <div class="input-group js-input-group">
-                <label for="hobbies" class="formheader">Hobbies</label>
+                <label for="hobbies" class="formheader">Hobbies: </label>
                 {{ form.hobbies(placeholder='eg: Chess, Swimming',class='form-control js-form-control') }}
+            </div>
+            <div class="input-group js-input-group">
+                <label for="hobbies" class="formheader">Job: </label>
+                {{ form.job(placeholder='eg: Software Developer',class='form-control js-form-control') }}
             </div>
         </fieldset>
 
         <fieldset class="step js-step">
             <div class="input-group js-input-group">
-                <label for="work" class="formheader">Work</label>
+                <label for="work" class="formheader">Experience: </label>
                 {{ form.work(placeholder='eg: Software Developer, SOCRadar, 2021 - Present',class='form-control js-form-control') }}
             </div>
             <div class="input-group js-input-group">
-                <label for="school" class="formheader">School</label>
+                <label for="school" class="formheader">School: </label>
                 {{ form.school(placeholder='eg: Computer Engineering, Sakarya University, 2019 - Present',class='form-control js-form-control') }}
             </div>
         </fieldset>

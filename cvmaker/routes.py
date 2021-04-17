@@ -27,7 +27,7 @@ def index():
     if current_user.imgfilename:
         img_url = images.url(current_user.imgfilename)
     else:
-        img_url = ""
+        img_url = None
     return render_template('index-new.html',img_url=img_url)
 
 @app.route('/edit',methods=['GET','POST'])
@@ -145,7 +145,7 @@ def getpdf():
     if current_user.imgfilename:
         img_url = images.url(current_user.imgfilename)
     else:
-        img_url = ""
+        img_url = None
     html = render_template('resume-new.html',img_url=img_url)
     #return render_template('resume.html', title='Register')
     return render_pdf(HTML(string=html))

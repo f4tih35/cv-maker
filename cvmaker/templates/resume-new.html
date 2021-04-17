@@ -164,9 +164,11 @@
 
     <div class="container">
         <div class="header">
+            {% if current_user.imgfilename %}
             <div class="image">
                 <img src="{{img_url}}" style="max-width:150px" alt="">
             </div>
+            {% endif %}
             <br><br>
             <div class="full-name">
                 <span class="first-name">{{current_user.firstname}}</span>

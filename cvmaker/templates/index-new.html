@@ -21,7 +21,11 @@
               </div>
               <div class="card-body">
                 <p class="text-center">
+                  {% if current_user.imgfilename %}
                   <img  style="max-height: 100px;" src="{{img_url}}" alt="">
+                  {% else %}
+                  <img  style="max-height: 100px;" src="{{url_for('static', filename='uploads/images/egg.jpg')}}" alt="">
+                  {% endif %}
                 </p>
                 
                 <hr>

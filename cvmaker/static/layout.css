@@ -132,7 +132,7 @@
     button {
       padding: 10px 15px;
       color: #ffffff;
-      background-color: #007bff;
+      background-color: #6777ef;
       border: 0;
       cursor: pointer;
     }
@@ -189,4 +189,5 @@
       transform-origin: left center;
       transform: scaleX(0.01);
       transition: transform 0.2s ease;
+      background-color: #6777ef !important;
     }

@@ -1,0 +1,51 @@
+{% extends "layout-new.html" %}
+{% block content %}
+
+
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Home</h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a href="./">Home</a></li>
+      </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- Form Basic -->
+            <div class="card mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Welcome, {{ current_user.firstname}} {{current_user.lastname }}</h6>
+                <a class="btn btn-primary" id="pdfbtn" href="{{url_for('edit')}}">Edit Profile</a>
+              </div>
+              <div class="card-body">
+                <p class="info-element">Email: {{ current_user.email }}</p>
+                <p class="info-element">First Name: {{ current_user.firstname }}</p>
+                <p class="info-element">Last Name: {{ current_user.lastname }}</p>
+                <p class="info-element">Phone: {{ current_user.phone }}</p>
+                <p class="info-element">Address: {{ current_user.address }}</p>
+                <p class="info-element">Work: {{ current_user.work }}</p>
+                <p class="info-element">School: {{ current_user.school }}</p>
+                <p class="info-element">Hobbies: {{ current_user.hobbies }}</p>
+              </div>
+              <a class="btn btn-primary" id="pdfbtn" href="{{url_for('getpdf')}}">Export PDF</a>
+            </div>
+          </div>
+
+
+          <div class="col-lg-6">
+            <!-- Form Basic -->
+            <div class="card mb-4">
+                
+                
+              <div class="card-body">
+                Soon
+              </div>
+            </div>
+          </div>
+    </div>
+    <!--Row-->
+
+
+  </div>
+{% endblock content %}

@@ -19,15 +19,21 @@ def upload():
         return f'Filename: { filename }'
     return render_template('upload.html', form=form)
 
+
 @app.route('/welcomesite')
 def welcomesite():
     return render_template('welcomesite.html')
 
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/')
 @app.route('/home',methods=['GET','POST'])
 @login_required
 def index():
+    return render_template('index-new.html')
+
+@app.route('/edit',methods=['GET','POST'])
+@login_required
+def edit():
     form = EditForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -57,8 +63,8 @@ def index():
         flash(f'Edited', 'success')
     if current_user.imgfilename:
         img_url = images.url(current_user.imgfilename)
-        return render_template('index.html', title='Home', form=form, img_url=img_url)
-    return render_template('index.html', title='Home', form=form)
+        return render_template('edit-new.html', title='Home', form=form, img_url=img_url)
+    return render_template('edit-new.html', title='Home', form=form)
 
 @app.route('/login',methods=['GET','POST'])
 def login():
@@ -74,12 +80,12 @@ def login():
         else:
             flash(f'Email or password incorrect', 'danger')
             return redirect(url_for('login'))
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login-new.html', title='Login', form=form)
 
 @app.route('/welcome',methods=['GET','POST'])
 @login_required
 def welcome():
-    if current_user.welcome == False:
+    if current_user.welcome == False or current_user.welcome == True:
         form = WelcomeForm()
         if form.validate_on_submit():
             current_user.firstname = form.firstname.data
@@ -119,7 +125,7 @@ def register():
         flash(f'Account created', 'success')
         logout_user()
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register-new.html', title='Register', form=form)
 
 @app.route("/logout")
 @login_required

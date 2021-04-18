@@ -20,7 +20,6 @@ def upload():
     return render_template('upload.html', form=form)
 
 
-@app.route('/')
 @app.route('/home',methods=['GET','POST'])
 @login_required
 def index():
@@ -149,3 +148,13 @@ def getpdf():
     html = render_template('resume-new.html',img_url=img_url)
     #return render_template('resume.html', title='Register')
     return render_pdf(HTML(string=html))
+
+
+@app.errorhandler(400)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.route('/')
+def intro():
+    return render_template('intro-new.html')
+
